@@ -1,0 +1,136 @@
+//Setting a JSON Value in a JSON Object
+
+private void jsonSetter(JSONArray array, String key, Object replace) {
+ for (int i=0; i<array.length(); i++) {
+	 try {
+		JSONObject obj = array.getJSONObject(i);
+		if (obj.has(key)) {
+			obj.putOpt(key,replace);
+		}
+	 } catch (JSONException e) {
+		// log("jsonSetter exception");
+	 }
+ }
+}
+// Assume JSONTicket is a JSONArray assigned to the sample JSON order ticket shown earlier
+// Call the helper function to set the value of the "customername" Object
+jsonSetter(JSONTicket,"customername","Hungry Person");
+
+
+
+//Getting a JSON Value from a JSON Object
+	private Object jsonGetter(JSONArray json, String key) {
+	 Object value = null;
+	 for (int i=0; i<json.length(); i++) {
+		 try {
+			 JSONObject obj = json.getJSONObject(i);
+			 if (obj.has(key)) {
+				value = obj.get(key);
+			 }
+		 } catch (JSONException e) {
+			// log("jsonGetter Exception=" +e);
+		 }
+	 }
+	 return value;
+	}
+
+// Assume JSONTicket is a JSONArray assigned to the sample JSON order ticket shown earlier
+// Call the helper function to get the value of the "waiter" Object
+	String waiter = jsonGetter(JSONTicket,"waiter").toString();
+
+
+//Creating a JSON File Programmatically
+
+// Create a blank JSON Order Ticket
+	try {
+	 JSONArray ticketAry = new JSONArray();
+	 JSONArray dishesAry = new JSONArray();
+	 JSONObject tmpObj = new JSONObject();
+	 ticketAry.put(tmpObj.put("orderid",""));
+	 ticketAry.put(tmpObj.put("customername",""));
+	 ticketAry.put(tmpObj.put("tablename",""));
+	 ticketAry.put(tmpObj.put("waiter",""));
+	 ticketAry.put(tmpObj.put("guests",""));
+	 ticketAry.put(tmpObj.put("saletype",""));
+	 ticketary.put(tmpObj.put("time",""));
+	 ticketAry.put(tmpObj.put("ticketnum",""));
+	 ticketAry.put(tmpObj.put("ordertotal",0));
+	 ticketAry.put(tmpObj.put("deliveryaddress",""));
+	 ticketAry.put(tmpObj.put("dishes",dishesAry));
+	} catch (JSONException e) {
+	 // log("JSONException Intial e=" + e);
+	}
+
+
+//Reading and Parsing a JSON File
+// This code will parse a JSON Array of values, such as the following:
+// jsonfile.txt = [ "value1","value2","value3","value4","value5" ]
+// Define the ArrayList that we will populate from the JSON Array
+	private ArrayList<String> myArrayList = new ArrayList<String>();
+	myArrayList.clear();
+// Step 1.
+// Read in the JSON file from local storage and save it as a String
+	Resources res = getResources();
+	InputStream in_s = res.openRawResource(R.raw.jsonfile);
+	byte[] b = new byte[in_s.available()];
+	in_s.read(b);
+	String fileTxt = (new String(b));
+// Step 2.
+// Assign the text file String to a JSONArray
+	JSONArray fileJsonAry = new JSONArray(fileTxt);
+// Step 3.
+// Build the ArrayList by iterating over the JSON Array
+	for (int i=0; i<fileJsonAry.length(); i++){
+	 String value = fileJsonAry.get(i).toString();
+	 myArrayList.add(value);
+	}
+
+//Printing JSON Strings
+String jsonText = ticketAry.toString();
+String jsonText = ticketAry.toString(4);
+
+//Removing JSON Arrays
+	public static JSONArray removeJSONArray(JSONArray inJSONArray, int pos) {
+		 JSONArray newJsonArray = new JSONArray();
+		 try {
+			 for (int i=0; i<inJSONArray.length(); i++) {
+			 if (i != pos)
+				newJsonArray.put(inJSONArray.get(i));
+			 }
+		 } catch (Exception e) {
+			e.printStackTrace();
+		 }
+		 return newJsonArray;
+	}
+
+// Using all this method in another block of code
+ try {
+	 // The next two lines access the dishes array assigned to the value of the "dishes" object
+	 JSONObject JSONdishObj = JSONOrderAry.getJSONObject(jsonGetter(JSONOrderAry,"dishes"));
+	 JSONArray JSONdishesAry = JSONdishObj.getJSONArray("dishes");
+	 int position = 1; // ID of the dish we want to remove
+	 
+	 // Check for SDK version to see if we can use the JSON .remove function directly
+	 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+		 JSONdishesAry.remove(position);
+	 } else {
+		// We need to do it with a helper function
+		JSONdishesAry = removeJSONArray(JSONdishesAry,position);
+	 } 
+	
+	
+/// GSON
+	Gson gson = new Gson();
+	
+	Serialization Examples:
+	String str = gson.toJson(myObj);
+	String str = gson.toJson(1);
+	String str = gson.toJson("abcd");
+	String str = gson.toJson(new Long(10));
+	String str = gson.toJson(values);
+	
+	Deserialization Examples:
+	int one = gson.fromJson("1", int.class);
+	Integer one = gson.fromJson("1", Integer.class);
+	Long one = gson.fromJson("1", Long.class);
+	Boolean false = gson.fromJson("false", Boolean.class);

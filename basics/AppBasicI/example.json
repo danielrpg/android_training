@@ -1,0 +1,28 @@
+{
+	"name": "Daniel",
+	"lastName": "Fernandez",
+	"address": "Casimiro valenzuela S/n street",
+	"hobbies": ["ride a bike", "play wally", "coding "],
+	"dependents": [{
+			"relationship": "wife",
+			"name": "Ruth",
+			"lastName": "Pacheco"
+		},
+		{
+			"relationship": "son",
+			"name": "Isaac",
+			"lastName": "Fernandez"
+		},
+		{
+			"relationship": "daughter",
+			"name": "Raquel",
+			"lastName": "Fernandez"
+		},
+		{
+			"relationship": "son",
+			"name": "David",
+			"lastName": "Fernandez"
+		}
+	],
+  "email" : "daniel.fernandezgp@gmail.com"
+}
