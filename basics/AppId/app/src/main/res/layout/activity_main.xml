@@ -14,17 +14,17 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"
+            android:id="@+id/etID" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"
             android:layout_marginTop="15dp" android:hint="@string/hint_id" android:gravity="center_horizontal"/>
     <Button
             android:text="@string/submit"
             android:layout_width="match_parent"
             android:background="@color/colorPrimaryDark"
-            android:layout_height="wrap_content" android:id="@+id/button" android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content" android:id="@+id/btnSubmit" android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp" android:layout_marginTop="10dp" android:textColor="#FFFFFF"/>
     <TextView
             android:text="TextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView" android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content" android:id="@+id/tvResults" android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp" android:layout_marginTop="10dp" android:gravity="center_horizontal"/>
 </LinearLayout>
